@@ -1,22 +1,24 @@
 //Declarative
 
 pipeline {
-	agent any
+	//agent any
+	agent { docker { image 'maven:latest' } }
 	stages {
 		stage ('Build') {
 			steps {
-					echo 'Build stage'
+				sh 'mvn --version'
+				echo 'Build stage'
 			}
 		}
 		stage ('Test') {
 			steps {
-					echo 'Test stage'
+				echo 'Test stage'
 			}
 		}
 		stage ('Integration test') {
 			steps {
-					echo 'Integration test stage'
-				}
+				echo 'Integration test stage'
+			}
 		}
 	}
 	//Post can be used for cleanup as well
