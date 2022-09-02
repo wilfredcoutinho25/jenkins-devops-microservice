@@ -36,6 +36,18 @@ pipeline {
 				echo 'Integration test stage'
 			}
 		}
+		stage ('Package') {
+			steps {
+				sh 'mvn package -DskipTest'
+			}
+		}
+		stage ('Docker image build') {
+			steps {
+				script {
+					docker.build("wilfredcoutinho25/currency-exchange-devops-jenkins:$env.BUILD_ID")
+				}
+			}
+		}
 	}
 	//Post can be used for cleanup as well
 	post {
